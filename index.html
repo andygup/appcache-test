@@ -22,15 +22,15 @@
     <script>
         var map;    //Global
 
-        // function onUpdateReady() {
-        //     console.log("Appcache has been updated. Running swapCache()")
-        //     window.applicationCache.swapCache()
-        // }
-        //
-        // window.applicationCache.addEventListener('updateready', onUpdateReady);
-        // if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-        //     onUpdateReady();
-        // }
+        function onUpdateReady() {
+            console.log("Appcache has been updated. Running swapCache()")
+            window.applicationCache.swapCache()
+        }
+
+        window.applicationCache.addEventListener('updateready', onUpdateReady);
+        if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+            onUpdateReady();
+        }
 
         require(["esri/map", "dojo/domReady!"], function(Map,test) {
 
