@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html manifest="example.appcache">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Simple Map</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.22/esri/css/esri.css">
+    <style>
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #FFF;
+            overflow: hidden;
+            font-family: "Trebuchet MS";
+        }
+    </style>
+    <script src="https://js.arcgis.com/3.22/"></script>
+    <script>
+        var map;    //Global
+
+        function onUpdateReady() {
+            alert('found new version!');
+            console.log("Appcache has been updated. Running swapCache()")
+            window.applicationCache.swapCache()
+        }
+
+        window.applicationCache.addEventListener('updateready', onUpdateReady);
+        if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+            onUpdateReady();
+        }
+
+        require(["esri/map", "dojo/domReady!"], function(Map,test) {
+
+            map = new Map("map", {
+                basemap: "topo",
+                center: [-122.45,37.75], // long, lat
+                zoom: 13,
+                sliderStyle: "small"
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="map"></div>
+</body>
+</html>
